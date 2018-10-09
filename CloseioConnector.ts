@@ -15,47 +15,47 @@ class CloseIOConnector {
         semantics: {
           conceptType: "DIMENSION"
         }
-      // },
-      // {
-      //   name: 'lead_id',
-      //   label: 'Close.io Lead ID',
-      //   dataType: 'STRING',
-      //   semantics: {
-      //     conceptType: "DIMENSION"
-      //   }
-      //
-      // },
-      // {
-      //   name: 'lead_name',
-      //   label: 'Close.io Lead Name',
-      //   dataType: 'STRING',
-      //   semantics: {
-      //     conceptType: "DIMENSION"
-      //   }
-      // },
-      // {
-      //   name: 'lead_status',
-      //   label: 'Close.io Lead Status',
-      //   dataType: 'STRING',
-      //   semantics: {
-      //     conceptType: "DIMENSION"
-      //   }
-      // },
-      // {
-      //   name: 'name',
-      //   label: "User's Name",
-      //   dataType: 'STRING',
-      //   semantics: {
-      //     conceptType: "DIMENSION"
-      //   }
-      // },
-      // {
-      //   name: 'email',
-      //   label: "User's Email",
-      //   dataType: 'STRING',
-      //   semantics: {
-      //     conceptType: "DIMENSION"
-      //   }
+      },
+      {
+        name: 'lead_id',
+        label: 'Close.io Lead ID',
+        dataType: 'STRING',
+        semantics: {
+          conceptType: "DIMENSION"
+        }
+
+      },
+      {
+        name: 'lead_name',
+        label: 'Close.io Lead Name',
+        dataType: 'STRING',
+        semantics: {
+          conceptType: "DIMENSION"
+        }
+      },
+      {
+        name: 'lead_status',
+        label: 'Close.io Lead Status',
+        dataType: 'STRING',
+        semantics: {
+          conceptType: "DIMENSION"
+        }
+      },
+      {
+        name: 'name',
+        label: "User's Name",
+        dataType: 'STRING',
+        semantics: {
+          conceptType: "DIMENSION"
+        }
+      },
+      {
+        name: 'email',
+        label: "User's Email",
+        dataType: 'STRING',
+        semantics: {
+          conceptType: "DIMENSION"
+        }
 
       }
 
@@ -126,28 +126,9 @@ class CloseIOConnector {
 
 
     const content =  {
-      schema: {
-        name: 'id',
-        label: 'Close.io ID',
-        dataType: 'STRING',
-        semantics: {
-          conceptType: "DIMENSION"
-        }
-      },
-      rows: [
-        {
-          values: [
-            "some id"
-          ]
-        }
-      ]
+      schema: requestedSchema,
+      rows: values
     };
-
-    console.log("content");
-    console.log(content);
-
-
-
 
     return content;
   }
@@ -173,12 +154,12 @@ class CloseIOConnector {
     const statusQuery = status.map((s) => `status:${s}`).join(" or ");
     // const statusQuery = "status:qualified or status:customer";
     try {
-      // const url = `https://app.close.io/api/v1/lead?per_page=9999999&query=${statusQuery}`;
-      // const options = {};
-      // options.headers = {"Authorization": "Basic " + Utilities.base64Encode(this.request.configParams.api_key + ":")};
-      // const response = UrlFetchApp.fetch(url, options);
-      // const leads = JSON.parse(response).data;
-      const leads = JSON.parse(this.mockResponse()).data;
+      const url = `https://app.close.io/api/v1/lead?per_page=9999999&query=${statusQuery}`;
+      const options = {};
+      options.headers = {"Authorization": "Basic " + Utilities.base64Encode(this.request.configParams.api_key + ":")};
+      const response = UrlFetchApp.fetch(url, options);
+      const leads = JSON.parse(response).data;
+      // const leads = JSON.parse(this.mockResponse()).data;
       return leads.map((l) => {return new Lead(l)})
     } catch(e) {
       console.error('getLeads() got an error: ' + e);

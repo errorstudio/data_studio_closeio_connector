@@ -20,10 +20,8 @@ function getSchema() {
 }
 
 function getData(request) {
-  console.log("request")  ;
-  console.log(request);
   try {
-    connector.getData(request);
+    return connector.getData(request);
 
   } catch(e) {
     console.log(e);

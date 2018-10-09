@@ -1,7 +1,7 @@
 {
   "dataStudio": {
     "name": "Get contacts from Close.io",
-    "logoUrl": "https://placehold.it/48x48",
+    "logoUrl": "https://raw.githubusercontent.com/errorstudio/data_studio_closeio_connector/master/close-io-logo-icon.png",
     "company": "Error Ltd",
     "companyUrl": "https://error.agency",
     "addonUrl": "https://github.com/errorstudio/data_studio_closeio_connector",
